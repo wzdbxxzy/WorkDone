@@ -39,9 +39,16 @@ class Config:
 
 
 def load_config(path: str = "config.yaml") -> Config:
-    """Load and validate YAML config file. Raises on missing required fields."""
+    """Load and validate YAML config file. Raises on missing required fields.
+
+    Relative ``log_dir`` is resolved against the config file's parent directory
+    so the tool works correctly from any working directory.
+    """
     if not os.path.exists(path):
         raise FileNotFoundError(f"Configuration file not found: {path}")
+
+    # Resolve config directory — used to make log_dir absolute
+    config_dir = os.path.dirname(os.path.abspath(path))
 
     with open(path, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
@@ -68,8 +75,10 @@ def load_config(path: str = "config.yaml") -> Config:
     # Server name
     cfg.server_name = data.get("server_name", "Server")
 
-    # Log dir
+    # Log dir — relative paths resolved against config file's parent directory
     cfg.log_dir = data.get("log_dir", "./logs")
+    if not os.path.isabs(cfg.log_dir):
+        cfg.log_dir = os.path.join(config_dir, cfg.log_dir)
 
     # Attach files
     cfg.attach_files = data.get("attach_files", [])

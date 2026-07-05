@@ -17,6 +17,9 @@ from notifier.config import load_config, validate_config
 from notifier.mailer import send_notification
 from notifier.runner import run_command, set_daemonized
 
+# 脚本所在目录 — 无论从哪个 CWD 执行，都能找到同目录下的 config.yaml
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -64,8 +67,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "-c", "--config",
-        default="config.yaml",
-        help="Path to the YAML configuration file (default: config.yaml).",
+        default=os.path.join(_SCRIPT_DIR, "config.yaml"),
+        help="Path to the YAML configuration file (default: <script_dir>/config.yaml).",
     )
     return parser.parse_args(argv)
 
