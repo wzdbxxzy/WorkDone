@@ -1,0 +1,22 @@
+# 配置文件（含真实邮箱密码，切勿提交）
+config.yaml
+
+# 日志输出目录
+logs/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyc
+
+# 测试文件夹
+test_task/
+
+# IDE
+.vscode/
+.idea/
+
+# 系统
+.DS_Store
+Thumbs.db

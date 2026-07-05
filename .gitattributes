@@ -1,0 +1,7 @@
+# Linux 服务器部署，统一使用 LF
+* text=auto eol=lf
+
+# 特定二进制文件不转换
+*.png binary
+*.jpg binary
+*.ico binary

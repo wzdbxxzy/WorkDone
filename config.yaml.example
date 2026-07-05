@@ -1,0 +1,22 @@
+smtp:
+  host: "smtp.example.com"
+  port: 111
+  user: "your@email.com"
+  password: "your_auth_code"
+  use_tls: true
+
+defaults:
+  from_address: "your@email.com"
+  to_address: "recipient@example.com"
+  task_name: "Unnamed Task"
+
+server_name: "MyServer"
+
+log_dir: "./logs"
+
+attach_files: []
+
+script: ""
+
+log_summary:
+  enabled: true
